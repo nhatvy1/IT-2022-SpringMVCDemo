@@ -6,7 +6,12 @@
 package com.dht.hibernatedemo;
 
 import com.dht.pojo.Category;
+import com.dht.pojo.Product;
+import com.dht.service.ProductService;
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,12 +22,16 @@ import org.hibernate.SessionFactory;
  */
 public class Demo {
     public static void main(String[] args) {
-        SessionFactory f = HibernateUtils.getSessionFactory();
-        try (Session s = f.openSession()) {
-            Query q = s.createQuery("From Category");
-            
-            List<Category> cates = q.getResultList();
-            cates.forEach(c -> System.out.printf("%d - %s\n", c.getId(), c.getName()));
-        }
+        ProductService s = new ProductService();
+        
+//        Map<String, String> pre = new HashMap<>();
+//        pre.put("kw", "iPhone");
+//        pre.put("fromPrice", "30000000");
+//        pre.put("cateId", "1");
+        
+//        List<Product> products = s.getProducts(pre);
+        List<Product> products = s.getProducts(null, 1);
+        
+        products.forEach(p -> System.out.println(p));
     }
 }

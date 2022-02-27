@@ -12,6 +12,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 import com.dht.pojo.Category;
+import com.dht.pojo.Product;
 
 
 /**
@@ -34,6 +35,7 @@ public class HibernateUtils {
         conf.setProperties(props);   
         
         conf.addAnnotatedClass(Category.class);
+        conf.addAnnotatedClass(Product.class);
         
         ServiceRegistry registy = new StandardServiceRegistryBuilder().applySettings(conf.getProperties()).build();
         
