@@ -24,7 +24,7 @@ import org.hibernate.SessionFactory;
  * @author Admin
  */
 public class ProductService {
-    private static SessionFactory factory = HibernateUtils.getSessionFactory();
+    private final static SessionFactory factory = HibernateUtils.getSessionFactory();
     
     public List<Product> getProducts(Map<String, String> params, int page) {
         try (Session session = factory.openSession()) {
