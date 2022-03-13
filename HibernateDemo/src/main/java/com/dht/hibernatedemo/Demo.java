@@ -6,21 +6,10 @@
 package com.dht.hibernatedemo;
 
 import com.dht.pojo.Cart;
-import com.dht.pojo.Category;
-import com.dht.pojo.Product;
 import com.dht.service.OrderService;
-import com.dht.service.ProductService;
-import com.dht.service.StatsService;
-import java.math.BigDecimal;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import javax.persistence.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 /**
  *
