@@ -5,6 +5,7 @@
  */
 package com.dht.repository.impl;
 
+import com.dht.pojo.OrderDetail;
 import com.dht.pojo.Product;
 import com.dht.repository.ProductRepository;
 import java.math.BigDecimal;
@@ -20,12 +21,14 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Admin
  */
 @Repository
+@Transactional
 public class ProductRepositoryImpl implements ProductRepository {
 
     @Autowired
@@ -73,12 +76,46 @@ public class ProductRepositoryImpl implements ProductRepository {
         Query query = session.createQuery(q);
 
         // Phân trang
-        int max = 3;
+        int max = 6;
         int index = (page - 1) * max;
         query.setFirstResult(index);
-        query.setMaxResults(3);
+        query.setMaxResults(max);
 
         return query.getResultList();
+    }
+
+    @Override
+    public List<Object[]> getTopProducts(int num) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+        
+        Root rootP = q.from(Product.class);
+        Root rootD = q.from(OrderDetail.class);
+        
+        q.where(b.equal(rootP.get("id"), rootD.get("product")));
+        q.multiselect(rootP.get("id"), 
+                rootP.get("name"), 
+                rootP.get("price"),
+                rootP.get("image"), 
+                b.sum(rootD.get("num")));
+        
+        q.groupBy(rootP.get("id"));
+        q.orderBy(b.desc(b.sum(rootD.get("num"))));
+        
+        
+        Query query = session.createQuery(q);
+        query.setMaxResults(num);
+        List<Object[]> results = query.getResultList();
+        
+        return results;
+    }
+
+    @Override
+    public Product getProductById(int productId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        
+        return session.get(Product.class, productId);
     }
 
 }

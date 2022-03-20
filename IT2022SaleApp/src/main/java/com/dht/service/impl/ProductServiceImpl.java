@@ -26,4 +26,14 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getProducts(Map<String, String> params, int page) {
         return this.productRepository.getProducts(params, page);
     }
+
+    @Override
+    public List<Object[]> getTopProducts(int num) {
+        return this.productRepository.getTopProducts(num);
+    }
+
+    @Override
+    public Product getProductById(int i) {
+        return this.productRepository.getProductById(i);
+    }
 }

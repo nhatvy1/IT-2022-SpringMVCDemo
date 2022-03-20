@@ -15,4 +15,6 @@ import java.util.Map;
  */
 public interface ProductService {
     List<Product> getProducts(Map<String, String> params, int page);
+    List<Object[]> getTopProducts(int num);
+    Product getProductById(int productId);
 }

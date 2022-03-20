@@ -5,6 +5,7 @@
  */
 package com.dht.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -70,6 +71,7 @@ public class User implements Serializable {
     @Column(name = "user_role")
     private String userRole;
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private Collection<SaleOrder> saleOrderCollection;
 
     public User() {
