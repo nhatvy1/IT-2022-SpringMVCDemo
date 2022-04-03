@@ -29,6 +29,9 @@
           <a class="nav-link" href="${cateUrl}">${c.name}</a>
         </li>
       </c:forEach>
+        <li class="nav-item">
+          <a class="nav-link" href="<c:url value="/register" />">Dang ky</a>
+      </li>
     </ul>
   </div>
   <form class="form-inline" action="">

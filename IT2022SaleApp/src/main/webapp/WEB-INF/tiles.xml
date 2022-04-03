@@ -18,4 +18,12 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Chi tiet san pham" />
         <put-attribute name="content" value="/WEB-INF/pages/product-detail.jsp" />
     </definition>
+    <definition name="register" extends="baseLayout">
+        <put-attribute name="title" value="Dang ky nguoi dung" />
+        <put-attribute name="content" value="/WEB-INF/pages/register.jsp" />
+    </definition>
+    <definition name="stats" extends="baseLayout">
+        <put-attribute name="title" value="Thong ke" />
+        <put-attribute name="content" value="/WEB-INF/pages/stats.jsp" />
+    </definition>
 </tiles-definitions>
